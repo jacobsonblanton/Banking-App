@@ -1,0 +1,72 @@
+{% extends 'add_account.html' %}
+{% block title %} Bank App | Check Balances {% endblock %}
+{% block div %}
+<!-- only showing the accounts if the user_id column in the checking table has the same value as the column id in the 
+user table -->
+<!--  displaying the user's checking accounts -->
+<!-- display the total balance for all checking accounts to the right of the table-->
+
+<table class="table-striped table-bordered table-hover">
+    <thead> Checking
+        <hr>
+        <tr>
+            <th>Balance</th>
+            <th>Checking Reference Number</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for i in checking %}
+            {% if i.user_id == user.id %}
+            <tr>
+                <td>{{ i.balance }}</td>
+                <td>{{ i.id }}</td>
+            </tr>
+            {% endif %}
+        {% endfor %}
+    </tbody>
+</table>
+<br/></br/>
+<!-- displaying the user's savings account-->
+<!-- display the total balance for all savings accounts to the right of the table-->
+<table class="table-striped table-bordered table-hover">
+    <thead> Savings
+        <hr>
+        <tr>
+            <th>Balance</th>
+            <th>Savings ReferenceNumber</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for i in savings %}
+            {% if i.user_id == user.id %}
+            <tr>
+                <td>{{ i.balance }}</td>
+                <td>{{ i.id }}</td>
+            </tr>
+            {% endif %}
+        {% endfor %}
+    </tbody>
+</table>
+</br></br>
+<!-- displaying the current user's credit card account-->
+<!-- display the total balance for all credit card accounts to the right of the table-->
+<table class="table-striped table-bordered table-hover">
+    <thead> Credit Card
+        <hr>
+        <tr>
+            <th>Balance</th>
+            <th>Credit Card Account Reference Number</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for i in credit_card %}
+            {% if i.user_id == user.id %}
+            <tr>
+                <td>{{ i.balance }}</td>
+                <td>{{ i.id }}</td>
+            </tr>
+            {% endif %}
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

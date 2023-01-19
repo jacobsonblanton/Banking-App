@@ -1,0 +1,41 @@
+{% extends "add_account.html" %}
+{% block title %} Bank App | Transfer Funds {% endblock %}
+{% block div %}
+<form method="POST">
+    <div class="form-group">
+        <label for="TransferFromType">What type of account would you like to transfer funds from?</label>
+        <select type="text" name="transfer-from-type-content" id="transfer-from-type-content" class="form-control" placeholder="Choose Account Type to Transfer Funds from">
+            <option value="Checking">Checking</option>
+            <option value="Savings">Savings</option>
+        </select>
+    </div>
+    <br/>
+    <br/>
+    <div class="form-group">
+        <label for="TransferFrom">Account to Transfer Funds from (Please enter your account refernce number)</label>
+        <input type="number" name="transfer-from-content" id="transfer-from-content" class="form-control" placeholder="Choose Account to Transfer Funds from">
+    </div>
+    <br/>
+    <br/>
+    <div class="form-group">
+        <label for="TransferToType">What type of account would you like to transfer funds to?</label>
+        <select type="text" name="transfer-to-type-content" id="transfer-to-type-content" class="form-control" placeholder="Choose Account Type to Transfer Funds to">
+            <option value="Checking">Checking</option>
+            <option value="Savings">Savings</option>
+        </select>
+    </div>
+    <br/>
+    <br/>
+    <div class="form-group">
+        <label for="TransferTo">Account to Transfer Funds to (Please enter your account refernce number)</label>
+        <input type="number" name="transfer-to-content" id="transfer-to-content" class="form-control" placeholder="Choose Account to Transfer Funds to">
+    </div>
+    <br/><br/>
+    <div class="form-group">
+        <label for="TransferAmount">Amount</label>
+        <input type="number" name="transfer-amount-content" id="transfer-amount-content" class="form-control" placeholder="Choose the amount to Transfer">
+    <br/><br/>
+    <button class="btn btn-outline-primary" type="submit">Transfer</button>
+
+</form>
+{% endblock %}

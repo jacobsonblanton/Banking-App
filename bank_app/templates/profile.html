@@ -1,0 +1,39 @@
+{% extends "home.html" %}
+{% block title %} Bank App | {{user.first_name}}'s Profile {% endblock %}
+{% block div %}
+<table class="table-striped table-bordered table-hover">
+    <thead> Account Information
+        <hr>
+        {% for i in users %}
+            {% if user.id == i.id %}
+        <tr>
+            <th>First Name</th>
+            <td>{{ user.first_name }}</td>
+        </tr>
+        <tr>
+            <th>Last Name</th>
+            <td>{{ user.last_name }}</td>
+        </tr>
+        <tr>
+            <th>Email</th>
+            <td>{{ user.email }}</td>
+        </tr>
+        <tr>
+            <th>Password</th>
+            <td>{{ user.password }}</td>
+        </tr>
+        <tr>
+            <th>Phone Number</th>
+            <td>{{ user.phone }}</td>
+        </tr>
+        <tr>
+            <th>Street Address</th>
+            <td>{{ user.address }}</td>
+        </tr>
+        {% endif %}
+    {% endfor %}
+    </thead>
+</table>
+
+
+{% endblock %}

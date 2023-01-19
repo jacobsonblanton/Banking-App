@@ -1,0 +1,32 @@
+{% extends 'check_balance.html' %}
+{% block title %} Bank App | Check Balances {% endblock %}
+{% block div %}
+<!-- only showing the transactions if the user_id column in the transactions table has the same value as the column id in the 
+user table -->
+<!--  displaying the user's transactions -->
+<!-- display all transactions to the right of the table-->
+
+<table class="table-striped table-bordered table-hover">
+    <thead> Transactions
+        <hr>
+        <tr>
+            <th>Transaction Number</th>
+            <th>Amount</th>
+            <th>Descrpition</th>
+            <th>Date Created</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for transaction in transactions %}
+            {% if user.id == transaction.user_id %}
+            <tr>
+                <td>{{ transaction.id }}</td>
+                <td>{{ transaction.amount }}</td>
+                <td>{{ transaction.data }}</td>
+                <td>{{ transaction.date_created }}</td>
+            </tr>
+            {% endif %}
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

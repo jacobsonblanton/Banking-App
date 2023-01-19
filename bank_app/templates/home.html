@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- using bootstrap css to build navbar-->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+     integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link href="{{url_for('static', filename='styles.css')}}" rel="stylesheet">
+    <script src="{{url_for('static', filename='script.js')}}" defer></script>
+    <title>{% block title %}Bank App | Home{% endblock %}</title>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <a class="navbar-brand" href="/">Home</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item active">
+                    <a class="nav-link" href="/check-balances">Check Balances<span class="sr-only"></span></a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" href="/add-account">Add Account<span class="sr-only"></span></a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" href="/add-funds">Add Funds<span class="sr-only"></span></a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" href="/transfer-funds">Transfer Funds<span class="sr-only"></span></a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" href="/make-payment">Make a Payment<span class="sr-only"></span></a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" href="/transactions">View Transactions<span class="sr-only"></span></a>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        {{user.first_name}}'s Profile
+                        
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <a class="dropdown-item" href="/profile">Profile Page</a>
+                        <a class="dropdown-item" href="profile-settings">Settings</a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="/logout">Logout</a>
+                    </div>
+                </li>
+                <!--
+                <li class="nav-item active">
+                    <a href="/create-asset" class=" btn btn-outline-primary btn-link" type="button">+ Add a New Asset</a>
+                </li>
+                <li class="nav-item active">
+                    <a href="/create-ticket" class=" btn btn-outline-primary btn-link" type="button">+ Create New Ticket</a>
+                </li>
+                -->
+            </ul>
+            <form class="form-inline my-2 my-lg-0">
+                <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+                <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+            </form>
+        </div>
+    </nav>
+    <br/>
+    <!--
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+    </style>
+    -->
+    <div class="container-fluid">{% block div %}
+        <div class="row">
+            <!-- if user has checking account, all of the checking accounts asscoiated with the user will be displayed-->
+            <!-- if user has savings account, all of the savings accounts asscoiated with the user will be displayed-->
+            <div class="column">
+                <h1>Home</h1>
+                <br/>
+                <h3>Accounts</h3>
+                <hr>
+                <br/>
+                <h6>account number</h6>
+                <div>
+                    <!--checking for accounts in the checking table-->
+                    {% for account in checking %}
+                        {% if user.id == account.user_id %}
+                            <p>checking account {{ account.id }}</p>
+                        {% endif %}
+                    {% endfor %}
+                    <!--checking for accounts in the savings table-->
+                    {% for account in savings %}
+                        {% if user.id == account.user_id %}
+                            <p>savings account {{ account.id }}</p>
+                        {% endif %}
+                    {% endfor %}
+                    <!--checking for accounts in the credit card table-->
+                    {% for account in credit_card %}
+                        {% if user.id == account.user_id %}
+                            <p>credit card account {{ account.id }}</p>
+                        {% endif %}
+                    {% endfor %}
+                </div>
+            </div>
+            <div class="column">
+                <h1><br/></h1>
+                <br/>
+                <h3><br/></h3>
+                <hr>
+                <br/>
+                <h6>available balance</h6>
+                <div>
+                    <!--retreiving balances for accounts in the checking table-->
+                    {% for account in checking %}
+                        {% if user.id == account.user_id %}
+                            <p>{{ account.balance }}</p>
+                        {% endif %}
+                    {% endfor %}
+                    <!--retreiving balances for accounts in the savings table-->
+                    {% for account in savings %}
+                        {% if user.id == account.user_id %}
+                            <p>{{ account.balance }}</p>
+                        {% endif %}
+                    {% endfor %}
+                    <!--retreiving balances for accounts in the credit card table-->
+                    {% for account in credit_card %}
+                        {% if user.id == account.user_id %}
+                            <p>{{ account.balance }}</p>
+                        {% endif %}
+                    {% endfor %}
+                </div>
+            </div>
+            <div class="column">
+                <h1><br/></h1>
+                <br/>
+                <h3><br/></h3>
+                <hr>
+                <br/>
+                <h6></h6>
+                <div>
+                    <buton type="button" class="btn btn-outline-primary" data-toggle="collapse" data-target="#trans-table">Recent</buton>
+                        
+                    <div class="collapse" id="trans-table">
+                        <br/>
+                        <table class="table-striped table-bordered table-hover">
+                            <thead> 
+                                <tr>
+                                    <th>Transaction Number</th>
+                                    <th>Amount</th>
+                                    <th>Descrpition</th>
+                                    <th>Date Created</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for transaction in transactions %}
+                                    {% if user.id == transaction.user_id %}
+                                    <tr>
+                                        <td>{{ transaction.id }}</td>
+                                        <td>{{ transaction.amount }}</td>
+                                        <td>{{ transaction.data }}</td>
+                                        <td>{{ transaction.date_created }}</td>
+                                    </tr>
+                                    {% endif %}
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>{% endblock %}
+    <!-- 
+    <div class="container-fluid item-c">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Notifications
+        </a>
+        <hr>
+        <p>This space will display the 5 most recent Notifications</p>
+        <div class="dropdown-menu">
+            <a class="dropdown-item" href="/notifications">View All</a>
+        </div>
+    </div>
+    -->
+        
+    <div class="container-fluid message box">
+        {% with messages = get_flashed_messages(with_categories=true) %} 
+            {% if messages %} 
+                {% for category, message in messages %} 
+                    {% if category == 'error' %}
+                    <div class="alert alert-danger alter-dismissable fade show" role="alert">
+                        {{ message }}
+                        <button type="button" class="close" data-dismiss="alert">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    {% else %}
+                    <div class="alert alert-success alter-dismissable fade show" role="alert">
+                        {{ message }}
+                        <button type="button" class="close" data-dismiss="alert">
+                            <span aria-hidden="true">&times;</span>
+                            </button>
+                    </div>
+                    {% endif %} 
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
+    </div>
+
+
+    <!-- using javascript to make the navbar responsive -->
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" 
+    integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" 
+    integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" 
+    integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+</body>
+</html>

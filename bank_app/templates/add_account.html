@@ -1,0 +1,18 @@
+{% extends 'home.html' %}
+{% block title %} Bank App | Add Account {% endblock %}
+{% block div %}
+<form method="POST">
+    <div class="form-group">
+        <label for="AccountType">Account Type</label>
+        <select type="text" name="account-content" id="account-content" class="form-control" placeholder="Select type of Account">
+            <option value="checking">Checking</option>
+            <option value="savings">Savings</option>
+            <option value="credit-card">Credit Card</option>
+        </select>
+    </div>
+    <br/>
+    <br/>
+    <button class="btn btn-outline-primary" type="submit">Add Account</button>
+
+</form>
+{% endblock %}

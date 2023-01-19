@@ -1,0 +1,26 @@
+{% extends 'transfer_funds.html' %}
+{% block div %}
+<form method="POST">
+    <div class="form-group">
+        <label for="AccountType">Select your Account Type</label>
+        <select type="text" name="account-type-content" id="account-type-content" class="form-control" placeholder="Choose Account to Add Funds to">
+            <option value="checking">Checking</option>
+            <option value="savings">Savings</option>
+        </select>
+    </div>
+    <br/>
+    <br/>
+    <div class="form-group">
+        <label for="AddTo">Account to Add Funds to (Please enter your account refernce number)</label>
+        <input type="number" name="add-to-content" id="add-to-content" class="form-control" placeholder="Choose Account to Add Funds to">
+    </div>
+    <br/>
+    <br/>
+    <div class="form-group">
+        <label for="AmountToAdd">How much would you like to add?</label>
+        <input type="number" name="amount-content" id="amount-content" class="form-control" placeholder="Choose Amount to Add">
+    </div>
+
+    <br/><br/>
+    <button class="btn btn-outline-primary" type="submit">Add Funds</button>
+{% endblock %}

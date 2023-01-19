@@ -1,0 +1,32 @@
+{% extends 'transfer_funds.html' %}
+{% block title %} Bank App | Make a Payment {% endblock %}
+{% block div %}
+<form method="POST">
+    <div class="form-group">
+        <label for="PaymentFromAcctType">What type of account would you like to make a payment from?</label>
+        <select type="text" name="payment-from-type-content" id="payment-from-type-content" class="form-control" placeholder="Choose Account Type to Make a Payment from">
+            <option value="Checking">Checking</option>
+            <option value="Savings">Savings</option>
+        </select>
+    </div>
+    <br/>
+    <br/>
+    <div class="form-group">
+        <label for="PaymentFrom">Account to Make a payment from (Please enter your account refernce number)</label>
+        <input type="number" name="payment-from-content" id="payment-from-content" class="form-control" placeholder="Choose Account to Make a Payment from">
+    </div>
+    <br/>
+    <br/>
+    <div class="form-group">
+        <label for="CreditCardAccount">Please enter your Credit Card Account refernce number</label>
+        <input type="number" name="credit-card-account-content" id="credit-card-account-content" class="form-control" placeholder="Enter your Credit Card Account Reference number">
+    </div>
+    <br/><br/>
+    <div class="form-group">
+        <label for="PaymentAmount">Amount</label>
+        <input type="number" name="payment-amount-content" id="payment-amount-content" class="form-control" placeholder="Choose your payment amount">
+    <br/><br/>
+    <button class="btn btn-outline-primary" type="submit">Make Payment</button>
+
+</form>
+{% endblock %}
